@@ -15,6 +15,13 @@ class Home
 
 		$data = [];
 
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			$post = new Post;
+
+			$posts = $post->get_posts($_POST['tags']);
+			$data['posts'] = $posts;
+		}
+
 		$this->view('home',$data);
 	}
 

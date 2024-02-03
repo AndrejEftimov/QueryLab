@@ -23,10 +23,12 @@
 
       <input class="submit-btn" type="submit" value="Search">
 
-      <select class="multiple-select" name="tags[]" multiple="multiple">
-        <option value="option1">option1option1option1</option>
-        <option value="option1">option1</option>
-        <option value="option1">option1</option>
+      <select class="multiple-select" name="tags[]" multiple="multiple" required>
+        <?php foreach (TAGS as $tag): ?>
+          <option value="<?= $tag ?>">
+            <?= $tag ?>
+          </option>
+        <?php endforeach; ?>
       </select>
 
     </form>

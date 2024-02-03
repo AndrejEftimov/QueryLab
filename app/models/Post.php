@@ -37,4 +37,19 @@ class Post
 
         return false;
     }
+
+    public function get_posts($tags){
+        if(empty($tags)){
+            return false;
+        }
+        
+        $query = "SELECT post.id, post.title, post.text, post.image, post.date, ".
+        "post.upvote_count, post.reply_count, post.tags, user.username, user.profile_image ";
+
+        $query .= "FROM post ";
+
+        $query .= "INNER JOIN user ON post.user_id = user.id ";
+
+        $query .= "WHERE ";
+    }
 }

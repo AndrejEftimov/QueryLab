@@ -17,6 +17,10 @@ class Queries
 		$posts = $post->where(array('user_id' => $user_id));
 		$data['posts'] = $posts;
 
+		if(empty($data['posts'])){
+			$data['posts'] = [];
+		}
+
 		$this->view('queries', $data);
 	}
 

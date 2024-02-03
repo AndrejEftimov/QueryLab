@@ -21,8 +21,8 @@
     <div class="canvas">
 
         <form action="<?= ROOT ?>/queries/add" method="post">
-            <input name="title" type="text" class="title" placeholder="Title.." required>
-            <textarea name="text" class="text" id="" cols="30" rows="10" placeholder="Talk about anything.."
+            <input name="title" type="text" class="title" placeholder="Title..." required>
+            <textarea name="text" class="text" id="" cols="30" rows="10" placeholder="Talk about anything..."
                 required></textarea>
 
             <select class="multiple-select" name="tags[]" multiple="multiple" required>

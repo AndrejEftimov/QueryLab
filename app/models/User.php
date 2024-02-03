@@ -19,7 +19,8 @@ class User
 		'description',
 		'profile_image',
 		'date_joined',
-		'credits'
+		'credits',
+		'type'
 	];
 
 	public function create_user($data){
@@ -36,6 +37,7 @@ class User
 		$data['description'] = "";
 		$data['profile_image'] = "_default_profile_picture.png";
 		$data['credits'] = 0;
+		$data['type'] = 'user';
 
 		$this->insert($data);
 		return true;
