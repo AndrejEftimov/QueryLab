@@ -1,0 +1,67 @@
+.canvas {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    margin-top: 80px;
+    margin-left: 20%;
+    margin-bottom: 80px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.canvas .profile-image {
+    max-width: 35%;
+    min-width: 50px;
+}
+
+.canvas form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.canvas form .errors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    color: red;
+}
+
+.canvas form .username, .description{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+.canvas form .save-btn {
+    min-width: 100px;
+    height: 32px;
+    background: transparent;
+    border: 2px solid white;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    transition-duration: .3s;
+}
+
+.canvas form .save-btn:hover {
+    background: white;
+    color: black;
+}

@@ -40,7 +40,7 @@
 
           <div class="user-info">
             <img src="<?= ROOT ?>/assets/images/<?= $row[0]->profile_image ?>" alt="">
-            <a class="username" href="">
+            <a class="username" href="<?=ROOT?>/profile/index/<?=$row[0]->user_id?>">
               <?= $row[0]->username ?>
             </a>
           </div>

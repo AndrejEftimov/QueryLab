@@ -1,0 +1,54 @@
+.canvas {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    margin-top: 80px;
+    margin-left: 20%;
+    margin-bottom: 80px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.canvas .profile-image{
+    max-width: 35%;
+    min-width: 50px;
+}
+
+.canvas .edit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 120px;
+    height: 32px;
+    margin-top: 10px;
+    border: 2px solid white;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    transition-duration: 0.3s;
+}
+
+.canvas .edit:hover{
+    background: white;
+    color: black;
+}
+
+.canvas p{
+    margin-top: 10px;
+    padding: 5px;
+    background: purple;
+    border-radius: 5px;
+}
+
+.canvas .desc{
+    font-style: italic;
+}

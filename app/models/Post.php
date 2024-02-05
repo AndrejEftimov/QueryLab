@@ -52,7 +52,7 @@ class Post
         }
         
         $query = "SELECT post.id, post.title, post.text, post.image, post.date, 
-        post.upvote_count, post.reply_count, user.username, user.profile_image 
+        post.upvote_count, post.reply_count, user.id AS user_id, user.username, user.profile_image 
         FROM post_tag
         INNER JOIN post ON post_tag.post_id = post.id and ";
 

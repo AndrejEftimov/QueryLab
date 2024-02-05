@@ -24,7 +24,8 @@ function active($current_page)
 	$url_array = explode('/', $_SERVER['REQUEST_URI']);
 	$url1 = lcfirst(end($url_array));
 	$url2 = lcfirst(prev($url_array));
-	if ($current_page == $url1 or $current_page == $url2) {
+	$url3 = lcfirst(prev($url_array));
+	if ($current_page == $url1 or $current_page == $url2 or $current_page == $url3) {
 		echo 'active'; //class name in css 
 	}
 }
