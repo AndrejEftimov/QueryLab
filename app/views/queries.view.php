@@ -21,8 +21,11 @@
 
     <div class="posts">
 
-      <?php foreach ($posts as $post): ?>
-        <?php $tags = explode(", ", $post->tags) ?>
+      <?php foreach ($rows as $row): ?>
+        <?php
+        $post = $row[0];
+        $tags = $row[1];
+        ?>
 
         <div class="post">
 
@@ -39,7 +42,9 @@
             </p>
             <div class="tags">
               <?php foreach ($tags as $tag): ?>
-                <p><?=$tag?></p>
+                <p>
+                  <?= $tag->name ?>
+                </p>
               <?php endforeach; ?>
             </div>
             <p class="title">
@@ -54,11 +59,11 @@
           <div class="actions">
             <a class="upvote" href="#">
               <i class='bx bx-upvote'></i>
-              Upvote
+              Upvote &middot; <?= $post->upvote_count ?>
             </a>
             <a class="reply" href="#">
               <i class='bx bx-comment'></i>
-              Reply
+              Reply &middot; <?= $post->reply_count ?>
             </a>
           </div>
 

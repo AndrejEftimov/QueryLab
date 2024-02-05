@@ -59,7 +59,6 @@ function create_database()
 			`date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 			`upvote_count` INT NOT NULL , 
 			`reply_count` INT NOT NULL , 
-			`tags` VARCHAR(100) NOT NULL , 
 			`user_id` INT NOT NULL , 
 			PRIMARY KEY (`id`),
 			FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT) 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * home class
@@ -9,20 +9,35 @@ class Home
 
 	public function index()
 	{
-		if(empty($_SESSION['USER'])){
+		if (empty($_SESSION['USER'])) {
 			redirect('login');
 		}
 
 		$data = [];
+		$data['rows'] = [];
 
-		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$t = new Tag;
+		$data['tags'] = $t->findAll();
+		$data['selected_tags'] = [];
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$post = new Post;
+			$tags = $t->get_tag_ids($_POST['tags']);
+			$posts = $post->get_posts_for_tags($tags);
 
-			$posts = $post->get_posts($_POST['tags']);
-			$data['posts'] = $posts;
+			
+			$rows = [];
+			foreach ($posts as $p) {
+				$tags = $post->get_tags($p->id);
+				array_push($rows, array($p, $tags));
+			}
+
+			$data['rows'] = $rows;
+
+			$data['selected_tags'] = $_POST['tags'];
 		}
 
-		$this->view('home',$data);
+		$this->view('home', $data);
 	}
 
 }

@@ -19,14 +19,13 @@
   <?php require($_SERVER["DOCUMENT_ROOT"] . '/QueryLab/app/views/header.view.php') ?>
 
   <div class="canvas">
-    <form>
+    <form action="<?= ROOT ?>/home/index" method="post">
 
       <input class="submit-btn" type="submit" value="Search">
-
       <select class="multiple-select" name="tags[]" multiple="multiple" required>
-        <?php foreach (TAGS as $tag): ?>
-          <option value="<?= $tag ?>">
-            <?= $tag ?>
+        <?php foreach ($tags as $tag): ?>
+          <option <?php echo(in_array($tag->name, $selected_tags) ? "selected" : ""); ?> value="<?= $tag->name ?>">
+            <?= $tag->name ?>
           </option>
         <?php endforeach; ?>
       </select>
@@ -34,38 +33,55 @@
     </form>
 
     <div class="posts">
-      <div class="post">
 
-        <div class="user-info">
-          <img src="<?= ROOT ?>/assets/images/LoginSignup.jpg" alt="">
-          <a class="username" href="">Username</a>
-        </div>
+      <?php foreach ($rows as $row): ?>
 
-        <div class="post-info">
-          <p class="date"> &middot; 31.01.2024 &nbsp;00:00</p>
-          <div class="tags">
-            <p>tag1</p>
-            <p>tag2</p>
+        <div class="post">
+
+          <div class="user-info">
+            <img src="<?= ROOT ?>/assets/images/<?= $row[0]->profile_image ?>" alt="">
+            <a class="username" href="">
+              <?= $row[0]->username ?>
+            </a>
           </div>
-          <p class="title">This is the title!</p>
-          <p class="text">
-            texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-          </p>
-          <img src="<?= ROOT ?>/assets/images/LoginSignup.jpg" alt="">
+
+          <div class="post-info">
+            <p class="date"> &middot;
+              <?= $row[0]->date ?>
+            </p>
+            <div class="tags">
+              <?php foreach ($row[1] as $tag): ?>
+                <p>
+                  <?= $tag->name ?>
+                </p>
+              <?php endforeach; ?>
+            </div>
+            <p class="title">
+              <?= $row[0]->title ?>
+            </p>
+            <p class="text">
+              <?= $row[0]->text ?>
+            </p>
+            <img src="<?= ROOT ?>/assets/images/<?= $row[0]->image ?>" alt="">
+          </div>
+
+          <div class="actions">
+            <a class="upvote" href="#">
+              <i class='bx bx-upvote'></i>
+              Upvote &middot;
+              <?= $row[0]->upvote_count ?>
+            </a>
+            <a class="reply" href="#">
+              <i class='bx bx-comment'></i>
+              Reply &middot;
+              <?= $row[0]->reply_count ?>
+            </a>
+          </div>
+
         </div>
 
-        <div class="actions">
-          <a class="upvote" href="#">
-            <i class='bx bx-upvote'></i>
-            Upvote
-          </a>
-          <a class="reply" href="#">
-            <i class='bx bx-comment'></i>
-            Reply
-          </a>
-        </div>
+      <?php endforeach; ?>
 
-      </div>
     </div>
   </div>
 

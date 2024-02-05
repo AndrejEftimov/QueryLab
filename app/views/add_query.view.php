@@ -26,8 +26,8 @@
                 required></textarea>
 
             <select class="multiple-select" name="tags[]" multiple="multiple" required>
-                <?php foreach (TAGS as $tag): ?>
-                    <option value="<?=$tag?>"><?=$tag?></option>
+                <?php foreach ($tags as $tag): ?>
+                    <option value="<?=$tag->name?>"><?=$tag->name?></option>
                 <?php endforeach; ?>
             </select>
 

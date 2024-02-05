@@ -13,7 +13,6 @@ class Post
         'text',
         'image',
         'date',
-        'tags',
         'user_id'
     ];
 
@@ -29,8 +28,6 @@ class Post
 
             $data['user_id'] = $_SESSION['USER']->id;
 
-            $data['tags'] = implode(", ", $data['tags']);
-
             $this->insert($data);
             return true;
         }
@@ -38,18 +35,41 @@ class Post
         return false;
     }
 
-    public function get_posts($tags){
+    public function get_tags($post_id){
+        $query = "SELECT tag.name FROM post INNER JOIN post_tag ON post.id = post_tag.post_id and post.id = $post_id INNER JOIN tag ON post_tag.tag_id = tag.id ORDER BY tag.name ASC";
+        $result = $this->query($query);
+
+        if(empty($result)){
+            $result = [];
+        }
+
+        return $result;
+    }
+
+    public function get_posts_for_tags($tags){
         if(empty($tags)){
-            return false;
+            return array();
         }
         
-        $query = "SELECT post.id, post.title, post.text, post.image, post.date, ".
-        "post.upvote_count, post.reply_count, post.tags, user.username, user.profile_image ";
+        $query = "SELECT post.id, post.title, post.text, post.image, post.date, 
+        post.upvote_count, post.reply_count, user.username, user.profile_image 
+        FROM post_tag
+        INNER JOIN post ON post_tag.post_id = post.id and ";
 
-        $query .= "FROM post ";
+        foreach($tags as $tag){
+            $query .= "post_tag.tag_id = $tag->id and ";
+        }
 
-        $query .= "INNER JOIN user ON post.user_id = user.id ";
+        $query = trim($query," and ");
 
-        $query .= "WHERE ";
+        $query .= " INNER JOIN user ON post.user_id = user.id ORDER BY post.date DESC";
+
+        $result = $this->query($query);
+
+        if(empty($result)){
+            $result = [];
+        }
+
+        return $result;
     }
 }
