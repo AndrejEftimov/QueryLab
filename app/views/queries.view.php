@@ -61,7 +61,7 @@
               <i class='bx bx-upvote'></i>
               Upvote &middot; <?= $post->upvote_count ?>
             </a>
-            <a class="reply" href="#">
+            <a class="reply" href="<?=ROOT?>/answers/index/<?=$post->id?>">
               <i class='bx bx-comment'></i>
               Reply &middot; <?= $post->reply_count ?>
             </a>

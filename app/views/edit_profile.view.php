@@ -26,9 +26,9 @@
                 </div>
             <?php endif; ?>
 
-            <input name="username" type="text" class="username" value="<?=$user->username?>" required>
+            <input name="username" type="text" class="username" value="<?=$user->username?>" required placeholder="Username...">
             <textarea name="description" class="description" id="" cols="30" rows="10"
-                required><?=$user->description?></textarea>
+                required placeholder="Description..."><?=$user->description?></textarea>
 
             <input type="submit" class="save-btn" value="Save">
         </form>

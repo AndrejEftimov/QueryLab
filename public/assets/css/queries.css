@@ -118,11 +118,23 @@
     padding: 10px;
 }
 
-.canvas .post .actions .upvote{
+.canvas .post .actions .upvote {
     margin-right: 20px;
     color: white;
+    padding: 5px;
 }
 
-.canvas .post .actions .reply{
+.canvas .post .actions .upvote:hover {
+    background: rgba(255, 255, 255, .2);
+    border-radius: 5px;
+}
+
+.canvas .post .actions .reply {
     color: white;
+    padding: 5px;
+}
+
+.canvas .post .actions .reply:hover {
+    background: rgba(255, 255, 255, .2);
+    border-radius: 5px;
 }

@@ -71,7 +71,7 @@
               Upvote &middot;
               <?= $row[0]->upvote_count ?>
             </a>
-            <a class="reply" href="#">
+            <a class="reply" href="<?=ROOT?>/answers/index/<?=$row[0]->id?>">
               <i class='bx bx-comment'></i>
               Reply &middot;
               <?= $row[0]->reply_count ?>

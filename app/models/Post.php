@@ -13,8 +13,21 @@ class Post
         'text',
         'image',
         'date',
-        'user_id'
+        'user_id',
+        'upvote_count',
+        'reply_count'
     ];
+
+    public function get_post($post_id){
+        $query = "SELECT post.id, post.title, post.text, post.image, post.date, 
+        post.upvote_count, post.reply_count, user.id AS user_id, user.username, user.profile_image 
+        FROM post 
+        INNER JOIN user ON post.user_id = user.id and post.id = $post_id";
+
+        $result = $this->query($query);
+
+        return $result[0];
+    }
 
     public function insert_post($data)
     {
@@ -53,7 +66,7 @@ class Post
         
         $query = "SELECT post.id, post.title, post.text, post.image, post.date, 
         post.upvote_count, post.reply_count, user.id AS user_id, user.username, user.profile_image 
-        FROM post_tag
+        FROM post_tag 
         INNER JOIN post ON post_tag.post_id = post.id and ";
 
         foreach($tags as $tag){
@@ -71,5 +84,11 @@ class Post
         }
 
         return $result;
+    }
+
+    public function increment_reply_count($id){
+        $post = $this->first(array('id' => $id));
+        $rc = $post->reply_count + 1;
+        $this->update($id, array('reply_count' => $rc));
     }
 }

@@ -24,7 +24,6 @@ class Home
 			$post = new Post;
 			$tags = $t->get_tag_ids($_POST['tags']);
 			$posts = $post->get_posts_for_tags($tags);
-
 			
 			$rows = [];
 			foreach ($posts as $p) {

@@ -25,7 +25,6 @@ Trait Database
 				return $result;
 			}
 		}
-
 		return false;
 	}
 
