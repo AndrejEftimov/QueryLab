@@ -1,8 +1,8 @@
 .canvas {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
-    flex-direction:column;
+    flex-direction: column;
     width: 60%;
     margin-top: 80px;
     margin-left: 20%;
@@ -16,38 +16,67 @@
     padding: 30px 40px;
 }
 
-.canvas form{
+.canvas form {
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     width: 50%;
 }
 
-.canvas form .title{
+.canvas form ::placeholder {
+    color: rgba(255, 255, 255, .5);
+    opacity: 1;
+    /* Firefox */
+}
+
+.canvas form ::-ms-input-placeholder {
+    /* Edge 12 -18 */
+    color: rgba(255, 255, 255, .5);
+}
+
+
+.canvas form .title {
     width: 100%;
     margin-bottom: 20px;
     padding: 10px;
     font-size: 18px;
     font-weight: bold;
-    border: none;
+    border: 2px solid white;
     border-radius: 5px;
+    background: transparent;
+    color: white;
 }
 
-.canvas form .text{
+.canvas form .text {
     width: 100%;
     margin-bottom: 20px;
     padding: 10px;
     font-size: 16px;
-    border: none;
+    border: 2px solid white;
     border-radius: 5px;
+    background: transparent;
+    color: white;
 }
 
-.canvas form .multiple-select{
+.canvas form .multiple-select {
     width: 100%;
 }
 
-.canvas form .submit-btn{
+.canvas form input[type="file"] {
+    display: none;
+}
+
+.canvas form .custom-file-upload {
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.canvas form .submit-btn {
     min-width: 100px;
     margin-top: 20px;
     height: 32px;
@@ -63,7 +92,7 @@
     transition-duration: .3s;
 }
 
-.canvas form .submit-btn:hover{
+.canvas form .submit-btn:hover {
     background: white;
     color: black;
 }

@@ -133,19 +133,23 @@
     margin-right: 20px;
     color: white;
     padding: 5px;
+    border-radius: 5px;
 }
 
 .canvas .post .actions .upvote:hover {
     background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
+}
+
+.canvas .post .actions .upvoted{
+    background: rgba(255, 255, 255, .2) !important;
 }
 
 .canvas .post .actions .reply {
     color: white;
     padding: 5px;
+    border-radius: 5px;
 }
 
 .canvas .post .actions .reply:hover {
     background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
 }

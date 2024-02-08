@@ -18,6 +18,7 @@
 .canvas .profile-image{
     max-width: 35%;
     min-width: 50px;
+    border-radius: 20px;
 }
 
 .canvas .edit{

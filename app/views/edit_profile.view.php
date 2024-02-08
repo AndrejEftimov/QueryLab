@@ -18,7 +18,7 @@
     <div class="canvas">
         <img src="<?= ROOT ?>/assets/images/<?= $user->profile_image ?>" alt="" class="profile-image">
 
-        <form action="<?= ROOT ?>/profile/edit/<?=$user->id?>" method="post">
+        <form action="<?= ROOT ?>/profile/edit/<?= $user->id ?>" method="post" enctype="multipart/form-data">
 
             <?php if (!empty($errors)): ?>
                 <div class="errors">
@@ -26,9 +26,16 @@
                 </div>
             <?php endif; ?>
 
-            <input name="username" type="text" class="username" value="<?=$user->username?>" required placeholder="Username...">
-            <textarea name="description" class="description" id="" cols="30" rows="10"
-                required placeholder="Description..."><?=$user->description?></textarea>
+            <input name="username" type="text" class="username" value="<?= $user->username ?>" required
+                placeholder="Username...">
+            <textarea name="description" class="description" id="" cols="30" rows="10" required
+                placeholder="Description..."><?= $user->description ?></textarea>
+
+            <label for="file-upload" class="custom-file-upload">
+                <i class='bx bx-image-alt' ></i>
+                Change Profile Image
+            </label>
+            <input type="file" name="fileToUpload" id="file-upload">
 
             <input type="submit" class="save-btn" value="Save">
         </form>

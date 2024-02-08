@@ -44,8 +44,8 @@ function create_database()
 			`email` VARCHAR(100) NOT NULL , 
 			`password` VARCHAR(100) NOT NULL , 
 			`username` VARCHAR(50) NOT NULL , 
-			`description` VARCHAR(256) NOT NULL , 
-			`profile_image` VARCHAR(100) NOT NULL , 
+			`description` TEXT NOT NULL , 
+			`profile_image` VARCHAR(256) NOT NULL , 
 			`date_joined` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 			`credits` INT NOT NULL , 
 			`type` VARCHAR(20) NOT NULL , 
@@ -54,9 +54,9 @@ function create_database()
 
 	$pdo->query("CREATE TABLE IF NOT EXISTS `querylabdb`.`post` (
 			`id` INT NOT NULL AUTO_INCREMENT , 
-			`title` VARCHAR(100) NOT NULL , 
+			`title` VARCHAR(256) NOT NULL , 
 			`text` TEXT NOT NULL , 
-			`image` VARCHAR(100) NOT NULL , 
+			`image` VARCHAR(256) NOT NULL , 
 			`date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 			`upvote_count` INT NOT NULL , 
 			`reply_count` INT NOT NULL , 
@@ -77,14 +77,19 @@ function create_database()
 			FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT) 
 			ENGINE = InnoDB;");
 
-	$pdo->query("CREATE TABLE IF NOT EXISTS `querylabdb`.`upvote` (
-			`id` INT NOT NULL AUTO_INCREMENT , 
+	$pdo->query("CREATE TABLE IF NOT EXISTS `querylabdb`.`post_upvote` (
 			`user_id` INT NOT NULL , 
 			`post_id` INT NOT NULL , 
-			`reply_id` INT NOT NULL ,
-			PRIMARY KEY (`id`),
+			PRIMARY KEY (`user_id`, `post_id`),
 			FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-			FOREIGN KEY (`post_id`) REFERENCES `post`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+			FOREIGN KEY (`post_id`) REFERENCES `post`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT) 
+			ENGINE = InnoDB;");
+
+	$pdo->query("CREATE TABLE IF NOT EXISTS `querylabdb`.`reply_upvote` (
+			`user_id` INT NOT NULL , 
+			`reply_id` INT NOT NULL , 
+			PRIMARY KEY (`user_id`, `reply_id`),
+			FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 			FOREIGN KEY (`reply_id`) REFERENCES `reply`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT) 
 			ENGINE = InnoDB;");
 

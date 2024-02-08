@@ -48,7 +48,6 @@ class User
 	{
 		if (isset($data['username'])) {
 			$query = "SELECT * FROM user WHERE username = '{$data['username']}' AND id != '$id'";
-			show($query);
 			$result = $this->query($query);
 			if (!empty($result)) {
 				return false;

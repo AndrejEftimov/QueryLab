@@ -20,16 +20,22 @@
 
     <div class="canvas">
 
-        <form action="<?= ROOT ?>/queries/add" method="post">
+        <form action="<?= ROOT ?>/queries/add" method="post" enctype="multipart/form-data">
             <input name="title" type="text" class="title" placeholder="Title..." required>
             <textarea name="text" class="text" id="" cols="30" rows="10" placeholder="Talk about anything..."
                 required></textarea>
 
             <select class="multiple-select" name="tags[]" multiple="multiple" required>
                 <?php foreach ($tags as $tag): ?>
-                    <option value="<?=$tag->name?>"><?=$tag->name?></option>
+                    <option value="<?= $tag->name ?>"><?= $tag->name ?></option>
                 <?php endforeach; ?>
             </select>
+
+            <label for="file-upload" class="custom-file-upload">
+                <i class='bx bx-image-alt'></i>
+                Add Image
+            </label>
+            <input type="file" name="fileToUpload" id="file-upload">
 
             <input type="submit" class="submit-btn" value="Create">
         </form>

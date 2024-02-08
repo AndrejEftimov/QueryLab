@@ -24,7 +24,7 @@
       <input class="submit-btn" type="submit" value="Search">
       <select class="multiple-select" name="tags[]" multiple="multiple" required>
         <?php foreach ($tags as $tag): ?>
-          <option <?php echo(in_array($tag->name, $selected_tags) ? "selected" : ""); ?> value="<?= $tag->name ?>">
+          <option <?php echo (in_array($tag->name, $selected_tags) ? "selected" : ""); ?> value="<?= $tag->name ?>">
             <?= $tag->name ?>
           </option>
         <?php endforeach; ?>
@@ -40,7 +40,7 @@
 
           <div class="user-info">
             <img src="<?= ROOT ?>/assets/images/<?= $row[0]->profile_image ?>" alt="">
-            <a class="username" href="<?=ROOT?>/profile/index/<?=$row[0]->user_id?>">
+            <a class="username" href="<?= ROOT ?>/profile/index/<?= $row[0]->user_id ?>">
               <?= $row[0]->username ?>
             </a>
           </div>
@@ -66,12 +66,14 @@
           </div>
 
           <div class="actions">
-            <a class="upvote" href="#">
-              <i class='bx bx-upvote'></i>
-              Upvote &middot;
-              <?= $row[0]->upvote_count ?>
+            <a class="upvote <?= ($row['2'] == true) ? 'upvoted' : '' ?>" href="#" id="<?= $row['0']->id ?>"
+              onclick="update_upvote(<?= $row['0']->id ?>, <?= $_SESSION['USER']->id ?>,)">
+              <i class='bx bx-upvote'></i> Upvote &middot;
+              <span class="upvote-count">
+                <?= $row[0]->upvote_count ?>
+              </span>
             </a>
-            <a class="reply" href="<?=ROOT?>/answers/index/<?=$row[0]->id?>">
+            <a class="reply" href="<?= ROOT ?>/answers/index/<?= $row[0]->id ?>">
               <i class='bx bx-comment'></i>
               Reply &middot;
               <?= $row[0]->reply_count ?>
@@ -89,6 +91,39 @@
     $(document).ready(function () {
       $('.multiple-select').select2();
     });
+
+    function update_upvote(post_id, user_id) {
+      var element = document.getElementById(post_id);
+      var upvote_count = element.getElementsByClassName("upvote-count")[0];
+      
+      const xhr = new XMLHttpRequest();
+      var url = '';
+
+      if (element.classList.contains('upvoted')) {
+        element.classList.remove('upvoted');
+        url = "<?= ROOT . "/upvotes/decrement" ?>";
+      }
+      else {
+        element.classList.add('upvoted');
+        url = "<?= ROOT . "/upvotes/increment" ?>";
+      }
+
+      // Configure the request
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      // Set up a callback function to handle the response
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          upvote_count.innerHTML = xhr.responseText;
+        } else {
+          console.error('Request failed:', xhr.status, xhr.statusText);
+        }
+      };
+
+      // Send the request
+      xhr.send("post_id=" + post_id + "&" + "user_id=" + user_id);
+    }
   </script>
 
 </body>

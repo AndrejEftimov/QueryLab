@@ -18,6 +18,7 @@
 .canvas .profile-image {
     max-width: 35%;
     min-width: 50px;
+    border-radius: 20px;
 }
 
 .canvas form {
@@ -29,6 +30,17 @@
     margin-top: 20px;
 }
 
+.canvas form ::placeholder {
+    color: rgba(255, 255, 255, .5);
+    opacity: 1;
+    /* Firefox */
+}
+
+.canvas form ::-ms-input-placeholder {
+    /* Edge 12 -18 */
+    color: rgba(255, 255, 255, .5);
+}
+
 .canvas form .errors {
     display: flex;
     justify-content: center;
@@ -37,13 +49,28 @@
     color: red;
 }
 
-.canvas form .username, .description{
+.canvas form .username,
+.description {
     width: 100%;
     margin-bottom: 20px;
     padding: 10px;
     font-size: 16px;
-    border: none;
+    border: 2px solid white;
     border-radius: 5px;
+    background: transparent;
+    color: white;
+}
+
+.canvas form input[type="file"] {
+    display: none;
+}
+
+.canvas form .custom-file-upload {
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .canvas form .save-btn {
