@@ -20,10 +20,15 @@ class Queries
 			$posts = [];
 		}
 
+		$up = new PostUpvote;
 		$rows = [];
 		foreach ($posts as $p) {
 			$tags = $post->get_tags($p->id);
-			array_push($rows, array($p, $tags));
+			$upvoted = $up->first(array('user_id' => $_SESSION['USER']->id, 'post_id' => $p->id));
+			if ($upvoted != false) {
+				$upvoted = true;
+			}
+			array_push($rows, array($p, $tags, $upvoted));
 		}
 
 		$data['rows'] = $rows;

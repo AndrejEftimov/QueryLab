@@ -66,13 +66,13 @@
           </div>
 
           <div class="actions">
-            <a class="upvote <?= ($row['2'] == true) ? 'upvoted' : '' ?>" href="#" id="<?= $row['0']->id ?>"
+            <p id="<?= $row['0']->id ?>" class="upvote <?= ($row['2'] == true) ? 'upvoted' : '' ?>"
               onclick="update_upvote(<?= $row['0']->id ?>, <?= $_SESSION['USER']->id ?>,)">
               <i class='bx bx-upvote'></i> Upvote &middot;
               <span class="upvote-count">
                 <?= $row[0]->upvote_count ?>
               </span>
-            </a>
+            </p>
             <a class="reply" href="<?= ROOT ?>/answers/index/<?= $row[0]->id ?>">
               <i class='bx bx-comment'></i>
               Reply &middot;
@@ -95,7 +95,7 @@
     function update_upvote(post_id, user_id) {
       var element = document.getElementById(post_id);
       var upvote_count = element.getElementsByClassName("upvote-count")[0];
-      
+
       const xhr = new XMLHttpRequest();
       var url = '';
 

@@ -15,6 +15,7 @@ class Home
 
 		$data = [];
 		$data['rows'] = [];
+		$rows = [];
 
 		$t = new Tag;
 		$data['tags'] = $t->findAll();
@@ -24,20 +25,20 @@ class Home
 			$post = new Post;
 			$tags = $t->get_tag_ids($_POST['tags']);
 			$posts = $post->get_posts_for_tags($tags);
-			
-			$up = new PostUpvote;
-			$rows = [];
-			foreach ($posts as $p) {
-				$tags = $post->get_tags($p->id);
-				$upvoted = $up->first(array('user_id' => $_SESSION['USER']->id, 'post_id' => $p->id));
-				if($upvoted != false){
-					$upvoted = true;
+
+			if (!empty($posts)) {
+				$up = new PostUpvote;
+				foreach ($posts as $p) {
+					$tags = $post->get_tags($p->id);
+					$upvoted = $up->first(array('user_id' => $_SESSION['USER']->id, 'post_id' => $p->id));
+					if ($upvoted != false) {
+						$upvoted = true;
+					}
+					array_push($rows, array($p, $tags, $upvoted));
 				}
-				array_push($rows, array($p, $tags, $upvoted));
 			}
 
 			$data['rows'] = $rows;
-
 			$data['selected_tags'] = $_POST['tags'];
 		}
 

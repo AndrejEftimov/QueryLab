@@ -88,28 +88,34 @@
 }
 
 .canvas .post .actions {
-    padding: 10px 10px 14px 10px;
+    padding: 10px;
 }
 
 .canvas .post .actions .upvote {
+    display: inline-block;
     margin-right: 20px;
     color: white;
     padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .canvas .post .actions .upvote:hover {
     background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
+}
+
+.canvas .post .actions .upvoted {
+    background: rgba(255, 255, 255, .2) !important;
 }
 
 .canvas .post .actions .reply {
     color: white;
     padding: 5px;
+    border-radius: 5px;
 }
 
 .canvas .post .actions .reply:hover {
     background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
 }
 
 
@@ -173,11 +179,11 @@
     margin-bottom: 20px;
 }
 
-.canvas .replies hr{
+.canvas .replies hr {
     border-color: rgba(255, 255, 255, .2);
 }
 
-.canvas .reply{
+.canvas .reply {
     width: 100%;
 }
 
@@ -221,22 +227,18 @@
 }
 
 .canvas .reply .actions .upvote {
+    display: inline-block;
     margin-right: 20px;
     color: white;
     padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .canvas .reply .actions .upvote:hover {
     background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
 }
 
-.canvas .reply .actions .reply {
-    color: white;
-    padding: 5px;
-}
-
-.canvas .reply .actions .reply:hover {
-    background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
+.canvas .reply .actions .upvoted {
+    background: rgba(255, 255, 255, .2) !important;
 }

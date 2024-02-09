@@ -18,7 +18,11 @@
     <div class="canvas">
 
         <div class="replies">
-            <?php foreach ($replies as $key => $reply): ?>
+            <?php foreach ($rows as $key => $row): ?>
+                <?php
+                $reply = $row[0];
+                $upvoted = $row[1];
+                ?>
                 <div class="reply">
 
                     <div class="user-info">
@@ -38,24 +42,62 @@
                     </div>
 
                     <div class="actions">
-                        <a class="upvote" href="#">
+                        <p id="<?= $reply->id ?>" class="upvote <?= ($upvoted == true) ? 'upvoted' : '' ?>"
+                            onclick="update_upvote(<?= $reply->id ?>, <?= $_SESSION['USER']->id ?>,)">
                             <i class='bx bx-upvote'></i>
                             Upvote &middot;
-                            <?= $reply->upvote_count ?>
-                        </a>
-                        <a class="view-post" href="<?=ROOT?>/answers/index/<?=$reply->post_id?>">
-                        VIEW POST
+                            <span class="upvote-count">
+                                <?= $reply->upvote_count ?>
+                            </span>
+                        </p>
+                        <a class="view-post" href="<?= ROOT ?>/answers/index/<?= $reply->post_id ?>">
+                            VIEW POST
                         </a>
                     </div>
                 </div>
 
-                <?php if ($key != array_key_last($replies)): ?>
+                <?php if ($key != array_key_last($rows)): ?>
                     <hr>
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
 
     </div>
+
+    <script>
+        function update_upvote(reply_id, user_id) {
+            var element = document.getElementById(reply_id);
+            var upvote_count = element.getElementsByClassName("upvote-count")[0];
+
+            const xhr = new XMLHttpRequest();
+            var url = '';
+
+            if (element.classList.contains('upvoted')) {
+                element.classList.remove('upvoted');
+                url = "<?= ROOT . "/upvotes/decrement" ?>";
+            }
+            else {
+                element.classList.add('upvoted');
+                url = "<?= ROOT . "/upvotes/increment" ?>";
+            }
+
+            // Configure the request
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            // Set up a callback function to handle the response
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    upvote_count.innerHTML = xhr.responseText;
+                } else {
+                    console.error('Request failed:', xhr.status, xhr.statusText);
+                }
+            };
+
+            // Send the request
+            xhr.send("reply_id=" + reply_id + "&" + "user_id=" + user_id);
+        }
+    </script>
 
 </body>
 

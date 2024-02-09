@@ -19,6 +19,12 @@
 
         <div class="post">
 
+            <?php
+            $post = $post_data[0];
+            $tags = $post_data[1];
+            $upvoted = $post_data[2];
+            ?>
+
             <div class="user-info">
                 <img src="<?= ROOT ?>/assets/images/<?= $post->profile_image ?>" alt="">
                 <a class="username" href="<?= ROOT ?>/profile/index/<?= $post->user_id ?>">
@@ -47,11 +53,14 @@
             </div>
 
             <div class="actions">
-                <a class="upvote" href="#">
+                <p id="<?= "post_" . $post->id ?>" class="upvote <?= ($upvoted == true) ? 'upvoted' : '' ?>"
+                    onclick="update_post_upvote(<?= $post->id ?>, <?= $_SESSION['USER']->id ?>,)">
                     <i class='bx bx-upvote'></i>
                     Upvote &middot;
-                    <?= $post->upvote_count ?>
-                </a>
+                    <span class="upvote-count">
+                        <?= $post->upvote_count ?>
+                    </span>
+                </p>
                 <a class="reply" href="#">
                     <i class='bx bx-comment'></i>
                     Reply &middot;
@@ -70,7 +79,11 @@
         </form>
 
         <div class="replies">
-            <?php foreach ($replies as $key => $reply): ?>
+            <?php foreach ($replies_data as $key => $reply_data): ?>
+                <?php
+                $reply = $reply_data[0];
+                $upvoted = $reply_data[1];
+                ?>
                 <div class="reply">
 
                     <div class="user-info">
@@ -90,21 +103,93 @@
                     </div>
 
                     <div class="actions">
-                        <a class="upvote" href="#">
+                        <p id="<?= "reply_" . $reply->id ?>" class="upvote <?= ($upvoted == true) ? 'upvoted' : '' ?>"
+                            onclick="update_reply_upvote(<?= $reply->id ?>, <?= $_SESSION['USER']->id ?>,)">
                             <i class='bx bx-upvote'></i>
                             Upvote &middot;
-                            <?= $reply->upvote_count ?>
-                        </a>
+                            <span class="upvote-count">
+                                <?= $reply->upvote_count ?>
+                            </span>
+                        </p>
                     </div>
                 </div>
 
-                <?php if ($key != array_key_last($replies)): ?>
+                <?php if ($key != array_key_last($replies_data)): ?>
                     <hr>
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
 
     </div>
+
+    <script>
+        function update_post_upvote(post_id, user_id) {
+            var element = document.getElementById('post_' + post_id);
+            var upvote_count = element.getElementsByClassName("upvote-count")[0];
+
+            const xhr = new XMLHttpRequest();
+            var url = '';
+
+            if (element.classList.contains('upvoted')) {
+                element.classList.remove('upvoted');
+                url = "<?= ROOT . "/upvotes/decrement" ?>";
+            }
+            else {
+                element.classList.add('upvoted');
+                url = "<?= ROOT . "/upvotes/increment" ?>";
+            }
+
+            // Configure the request
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            // Set up a callback function to handle the response
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    upvote_count.innerHTML = xhr.responseText;
+                } else {
+                    console.error('Request failed:', xhr.status, xhr.statusText);
+                }
+            };
+
+            // Send the request
+            xhr.send("post_id=" + post_id + "&" + "user_id=" + user_id);
+        }
+
+
+        function update_reply_upvote(reply_id, user_id) {
+            var element = document.getElementById('reply_' + reply_id);
+            var upvote_count = element.getElementsByClassName("upvote-count")[0];
+
+            const xhr = new XMLHttpRequest();
+            var url = '';
+
+            if (element.classList.contains('upvoted')) {
+                element.classList.remove('upvoted');
+                url = "<?= ROOT . "/upvotes/decrement" ?>";
+            }
+            else {
+                element.classList.add('upvoted');
+                url = "<?= ROOT . "/upvotes/increment" ?>";
+            }
+
+            // Configure the request
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            // Set up a callback function to handle the response
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    upvote_count.innerHTML = xhr.responseText;
+                } else {
+                    console.error('Request failed:', xhr.status, xhr.statusText);
+                }
+            };
+
+            // Send the request
+            xhr.send("reply_id=" + reply_id + "&" + "user_id=" + user_id);
+        }
+    </script>
 
 </body>
 

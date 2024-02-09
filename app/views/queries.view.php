@@ -25,6 +25,7 @@
         <?php
         $post = $row[0];
         $tags = $row[1];
+        $upvoted = $row[2];
         ?>
 
         <div class="post">
@@ -57,13 +58,18 @@
           </div>
 
           <div class="actions">
-            <a class="upvote" href="#">
+            <p id="<?= $post->id ?>" class="upvote <?= ($upvoted == true) ? 'upvoted' : '' ?>"
+              onclick="update_upvote(<?= $post->id ?>, <?= $_SESSION['USER']->id ?>,)">
               <i class='bx bx-upvote'></i>
-              Upvote &middot; <?= $post->upvote_count ?>
-            </a>
-            <a class="reply" href="<?=ROOT?>/answers/index/<?=$post->id?>">
+              Upvote &middot;
+              <span class="upvote-count">
+                <?= $post->upvote_count ?>
+              </span>
+            </p>
+            <a class="reply" href="<?= ROOT ?>/answers/index/<?= $post->id ?>">
               <i class='bx bx-comment'></i>
-              Reply &middot; <?= $post->reply_count ?>
+              Reply &middot;
+              <?= $post->reply_count ?>
             </a>
           </div>
 
@@ -74,6 +80,41 @@
     </div>
 
   </div>
+
+  <script>
+    function update_upvote(post_id, user_id) {
+      var element = document.getElementById(post_id);
+      var upvote_count = element.getElementsByClassName("upvote-count")[0];
+
+      const xhr = new XMLHttpRequest();
+      var url = '';
+
+      if (element.classList.contains('upvoted')) {
+        element.classList.remove('upvoted');
+        url = "<?= ROOT . "/upvotes/decrement" ?>";
+      }
+      else {
+        element.classList.add('upvoted');
+        url = "<?= ROOT . "/upvotes/increment" ?>";
+      }
+
+      // Configure the request
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      // Set up a callback function to handle the response
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          upvote_count.innerHTML = xhr.responseText;
+        } else {
+          console.error('Request failed:', xhr.status, xhr.statusText);
+        }
+      };
+
+      // Send the request
+      xhr.send("post_id=" + post_id + "&" + "user_id=" + user_id);
+    }
+  </script>
 
 </body>
 

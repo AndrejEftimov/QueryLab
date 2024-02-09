@@ -42,7 +42,7 @@ class Reply
 
     public function get_replies_for_post($post_id)
     {
-        $query = "SELECT reply.text, reply.date, reply.upvote_count, user.id as user_id, user.username, user.profile_image 
+        $query = "SELECT reply.id, reply.text, reply.date, reply.upvote_count, user.id as user_id, user.username, user.profile_image 
         FROM reply 
         INNER JOIN user ON reply.user_id = user.id and reply.post_id = $post_id 
         ORDER BY reply.date DESC";
@@ -58,7 +58,7 @@ class Reply
 
     public function get_replies_for_user($user_id)
     {
-        $query = "SELECT reply.text, reply.date, reply.upvote_count, user.id as user_id, user.username, user.profile_image, post.id as post_id 
+        $query = "SELECT reply.id, reply.text, reply.date, reply.upvote_count, user.id as user_id, user.username, user.profile_image, post.id as post_id 
         FROM reply 
         INNER JOIN user ON reply.user_id = user.id and user.id = $user_id 
         INNER JOIN post ON reply.post_id = post.id 

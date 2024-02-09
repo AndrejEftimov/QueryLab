@@ -23,11 +23,11 @@
     margin-bottom: 20px;
 }
 
-.canvas .replies hr{
+.canvas .replies hr {
     border-color: rgba(255, 255, 255, .2);
 }
 
-.canvas .reply{
+.canvas .reply {
     width: 100%;
 }
 
@@ -71,23 +71,29 @@
 }
 
 .canvas .reply .actions .upvote {
+    display: inline-block;
     margin-right: 20px;
     color: white;
     padding: 5px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .canvas .reply .actions .upvote:hover {
     background: rgba(255, 255, 255, .2);
 }
 
-.canvas .reply .actions .view-post{
+.canvas .reply .actions .upvoted {
+    background: rgba(255, 255, 255, .2) !important;
+}
+
+.canvas .reply .actions .view-post {
     margin-right: 20px;
     color: white;
     padding: 5px;
     border-radius: 5px;
 }
 
-.canvas .reply .actions .view-post:hover{
+.canvas .reply .actions .view-post:hover {
     background: rgba(255, 255, 255, .2);
 }

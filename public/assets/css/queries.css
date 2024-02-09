@@ -1,7 +1,7 @@
 .canvas {
     display: flex;
-    align-items:center;
-    flex-direction:column;
+    align-items: center;
+    flex-direction: column;
     width: 60%;
     margin-top: 80px;
     margin-left: 20%;
@@ -15,7 +15,7 @@
     padding: 30px 40px;
 }
 
-.canvas .add-query{
+.canvas .add-query {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,62 +31,61 @@
     transition-duration: 0.3s;
 }
 
-.canvas .add-query:hover{
+.canvas .add-query:hover {
     background: white;
     color: black;
 }
 
-.canvas .posts{
+.canvas .posts {
     width: 60%;
     margin-top: 10px;
 }
 
-.canvas .post{
+.canvas .post {
     width: 100%;
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 10px;
     margin-top: 20px;
 }
 
-.canvas .post .user-info{
+.canvas .post .user-info {
     display: flex;
     align-items: center;
     padding: 10px;
 }
 
-.canvas .post .user-info img{
+.canvas .post .user-info img {
     width: 50px;
     height: 50px;
     margin-right: 10px;
     border-radius: 10px;
 }
 
-.canvas .post .user-info .username{
+.canvas .post .user-info .username {
     font-size: 17px;
     color: white;
 }
 
-.canvas .post .user-info .username:hover{
+.canvas .post .user-info .username:hover {
     text-decoration: underline;
 }
 
-.canvas .post .post-info{
-}
+.canvas .post .post-info {}
 
-.canvas .post .post-info .date{
+.canvas .post .post-info .date {
     margin-left: 10px;
     color: rgb(220, 220, 220);
     font-size: 15px;
 }
 
-.canvas .post .post-info .tags{
+.canvas .post .post-info .tags {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 5px 10px 0 10px;
 }
 
-.canvas .post .post-info .tags p{
+.canvas .post .post-info .tags p {
     display: inline-block;
     padding: 3px 6px;
     margin-right: 5px;
@@ -94,7 +93,7 @@
     border-radius: 5px;
 }
 
-.canvas .post .post-info .title{
+.canvas .post .post-info .title {
     margin: 10px 0 0 10px;
     font-size: 18px;
     font-weight: 700;
@@ -102,18 +101,18 @@
     word-wrap: break-word;
 }
 
-.canvas .post .post-info .text{
+.canvas .post .post-info .text {
     padding: 10px;
     font-size: 16px;
     color: white;
     word-wrap: break-word;
 }
 
-.canvas .post .post-info img{
+.canvas .post .post-info img {
     width: 100%;
 }
 
-.canvas .post .actions{
+.canvas .post .actions {
     display: flex;
     padding: 10px;
 }
@@ -122,19 +121,24 @@
     margin-right: 20px;
     color: white;
     padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .canvas .post .actions .upvote:hover {
     background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
+}
+
+.canvas .post .actions .upvoted {
+    background: rgba(255, 255, 255, .2) !important;
 }
 
 .canvas .post .actions .reply {
     color: white;
     padding: 5px;
+    border-radius: 5px;
 }
 
 .canvas .post .actions .reply:hover {
     background: rgba(255, 255, 255, .2);
-    border-radius: 5px;
 }
