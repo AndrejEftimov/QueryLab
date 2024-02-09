@@ -32,7 +32,7 @@ $tags = array('Music', 'Gaming', 'Computers', 'Software',
 'Architecture', 'Medicine', 'Economy', 'Law', 'Psychology', 'Books', 
 'Programming', 'Engineering', 'Physics', 'Mathematics', 'Electronics', 
 'Travel', 'Nature', 'Meditation', 'Coffee', 'Journalism', 'Anime', 
-'University', 'Studying', 'Cooking');
+'University', 'Studying', 'Cooking', 'Cars', 'Motorcycles');
 
 sort($tags);
 define('TAGS', $tags);
