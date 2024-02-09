@@ -27,7 +27,9 @@
 
             <select class="multiple-select" name="tags[]" multiple="multiple" required>
                 <?php foreach ($tags as $tag): ?>
-                    <option value="<?= $tag->name ?>"><?= $tag->name ?></option>
+                    <option value="<?= $tag->name ?>">
+                        <?= $tag->name ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
 
